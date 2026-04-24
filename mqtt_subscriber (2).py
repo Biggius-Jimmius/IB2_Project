@@ -9,6 +9,7 @@ Usage:
     python mqtt_subscriber.py
 """
 
+
 import json
 import ssl
 
@@ -17,7 +18,7 @@ import paho.mqtt.client as mqtt
 # ── Configuration ─────────────────────────────────────────────────────────────
 BROKER_HOST = "set-p-gt-01-mqtt.bm.icts.kuleuven.be"
 BROKER_PORT = 1883
-CA_CERT     = "ca.crt"               # copy ca.crt to the Pi as well
+CA_CERT     = "/home/pi/Desktop/ca.crt"        # copy ca.crt to the Pi as well
 TOPIC       = "sensors/laptop/data"
 CLIENT_ID   = "rpi-subscriber"
 
@@ -30,7 +31,7 @@ PASSWORD    = "ee2-all"
 # ─────────────────────────────────────────────────────────────────────────────
 
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc, properties=None):
     if rc == 0:
         print(f"[CONNECT] Connected — subscribing to '{TOPIC}'")
         client.subscribe(TOPIC, qos=1)
